@@ -179,8 +179,6 @@ export default function CodeConverterUI() {
     }
   };
 
-  
-
   return (
     <div className="min-h-screen bg-black text-white px-4 py-10 flex flex-col items-center">
       <h1 className="text-5xl font-bold text-pink-500 mb-1">Online!</h1>
@@ -188,14 +186,10 @@ export default function CodeConverterUI() {
         {sourceLang} to {targetLang} converter
       </h2>
 
-      <div className="flex flex-row justify-center items-center gap-12 mb-8">
+      {/* Language Selector */}
+      <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 mb-8">
         <div className="flex items-center gap-3">
-          <Image
-            src={iconMap[sourceLang]}
-            alt="Source Icon"
-            width={40}
-            height={40}
-          />
+          <Image src={iconMap[sourceLang]} alt="Source Icon" width={40} height={40} />
           <select
             className="bg-zinc-900 text-white px-4 py-2 rounded-md"
             value={sourceLang}
@@ -232,16 +226,13 @@ export default function CodeConverterUI() {
               </option>
             ))}
           </select>
-          <Image
-            src={iconMap[targetLang]}
-            alt="Target Icon"
-            width={40}
-            height={40}
-          />
+          <Image src={iconMap[targetLang]} alt="Target Icon" width={40} height={40} />
         </div>
       </div>
 
+      {/* Input and Output Panels */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl">
+        {/* Input Box */}
         <div className="bg-zinc-200 text-black rounded-xl shadow-md overflow-hidden">
           <div
             className="bg-zinc-300 px-4 py-2 text-sm flex items-center gap-2 cursor-pointer"
@@ -263,26 +254,25 @@ export default function CodeConverterUI() {
           </div>
           <textarea
             className="w-full h-72 p-4 bg-zinc-200 text-sm outline-none resize-none"
-            placeholder="Past your code hear"
+            placeholder="Paste your code here"
             value={inputCode}
             onChange={(e) => setInputCode(e.target.value)}
           />
         </div>
 
+        {/* Output Box */}
         <div className="bg-zinc-200 text-black rounded-xl shadow-md relative overflow-hidden">
           <button
-  onClick={handleDownload}
-  className="bg-zinc-300 px-4 w-full py-2 text-sm flex items-center gap-2"
->
-  <button>
-    <FiDownload />
-  </button>
-  <span>
-    download your {targetLang} file in just one click.
-    <br />
-    you can also copy code below.
-  </span>
-</button>
+            onClick={handleDownload}
+            className="bg-zinc-300 px-4 w-full py-2 text-sm flex items-center gap-2"
+          >
+            <FiDownload />
+            <span>
+              Download your {targetLang} file in just one click.
+              <br />
+              You can also copy code below.
+            </span>
+          </button>
 
           <textarea
             className="w-full h-72 p-4 bg-zinc-200 text-sm outline-none resize-none"
@@ -299,6 +289,7 @@ export default function CodeConverterUI() {
         </div>
       </div>
 
+      {/* Action Buttons */}
       <div className="flex gap-4 mt-10">
         <button
           className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-md font-semibold"
