@@ -20,6 +20,7 @@ export default function FeatureSection() {
       {/* Video Section */}
       <div className="max-w-[1000px] w-full h-[55vw] md:h-[530px] mx-auto rounded-lg overflow-hidden shadow-[0_0_200px_10px_rgba(255,0,125,1)]">
         <video
+          src="/video.mp4"
           autoPlay
           muted
           loop
