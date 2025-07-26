@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "./_component/Header";
 import Footer from "./_component/Footer";
 import "aos/dist/aos.css";
-import { RiWhatsappLine, RiPhoneFill } from "react-icons/ri";
+import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} 
         antialiased bg-white dark:bg-[#171717] text-black dark:text-white overflow-x-hidden relative`}
         >
-        
+        <Analytics/>
         <Header />
         {children}
         <Footer />
