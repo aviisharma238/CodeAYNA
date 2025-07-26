@@ -49,6 +49,8 @@ export default function Footer() {
 
           <div className="flex w-full max-w-md">
             <input
+              id="email"
+              name="email"
               type="email"
               placeholder="Enter your email"
               className="px-4 py-2 w-full text-black rounded-l-md outline-none"
