@@ -9,6 +9,7 @@ export default function GetStartedSection() {
         <div className="w-full lg:w-1/2">
           <img
             src="/Whyimg.png"
+            alt="whyimg.png"
             className="w-full h-auto rounded-2xl shadow-lg"
           />
         </div>
