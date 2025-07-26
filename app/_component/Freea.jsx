@@ -3,7 +3,7 @@ import React from "react";
 
 export default function GetStartedSection() {
   return (
-    <section className="bg-black text-white py-20 px-4">
+    <section className="bg-black text-white  px-4">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* Left - Video */}
         <div className="w-full lg:w-1/2">

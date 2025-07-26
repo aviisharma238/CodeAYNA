@@ -4,7 +4,7 @@ import { FaInfinity, FaTrophy, FaTools, FaShieldAlt } from "react-icons/fa";
 
 export default function FeatureSection() {
   return (
-    <section className="bg-black text-white px-4 md:px-6 py-16 text-center">
+    <section className="bg-black text-white px-4 md:px-6 py-10 text-center">
       {/* Title Section */}
       <div className="py-8">
         <h4 className="text-3xl md:text-4xl font-bold">
@@ -33,7 +33,13 @@ export default function FeatureSection() {
         </video>
       </div>
 
-      <div className="max-w-6xl mx-auto text-center">
+
+
+
+
+
+
+      <div className="max-w-6xl mx-auto py-20 text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Why use{" "}
                 <span className="bg-gradient-to-l to-[#ff0000] from-[#E626FF] bg-clip-text text-transparent">
