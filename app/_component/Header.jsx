@@ -43,6 +43,20 @@ export default function Header() {
       {isMenuOpen && (
         <div className="md:hidden mt-4 px-4 space-y-3 font-medium">
           <Link
+            href="/"
+            className="block hover:text-gray-300"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            href="/converter"
+            className="block hover:text-gray-300"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Converter
+          </Link>
+          <Link
             href="/pricing"
             className="block hover:text-gray-300"
             onClick={() => setIsMenuOpen(false)}
