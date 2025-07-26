@@ -23,7 +23,7 @@ const ConverterGrid = () => {
         {languages.map((lang, index) => (
           <a
             key={index}
-            href={`/convert-from/${lang}`}
+            href="/converter"
             className="bg-gray-300 rounded-xl w-60 h-20 flex items-center justify-start gap-3 px-5 py-4 font-semibold text-black hover:bg-gray-400 transition"
           >
             <img
