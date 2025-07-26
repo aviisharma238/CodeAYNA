@@ -5,7 +5,7 @@ import { FaInfinity, FaTrophy, FaTools, FaShieldAlt } from "react-icons/fa";
 
 export default function WhyUseCodeConvert() {
   return (
-    <section className="bg-[#1a1a1d] text-white py-16 px-4">
+    <section className="bg-black text-white py-16 px-4">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Why use{" "}

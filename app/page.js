@@ -12,8 +12,7 @@ export default function Home() {
       <div className="bg-black text-white   relative ">
 
         <Hero />
-        <Vediobox />
-        <Wcca /> 
+        <Vediobox /> 
         <Freea />
         <Lang />
         
