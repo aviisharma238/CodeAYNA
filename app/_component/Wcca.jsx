@@ -21,7 +21,7 @@ export default function WhyUseCodeConvert() {
           {/* Left Features */}
           <div className="flex flex-col gap-16 text-left items-start">
             <div className="flex items-start gap-4 max-w-xs">
-              <FaInfinity className="text-cyan-400 text-4xl mt-1" />
+              <FaInfinity className="text-cyan-400 text-6xl " />
               <div>
                 <h3 className="font-semibold text-lg mb-1">Unlimited Use</h3>
                 <p className="text-gray-400 text-sm">
@@ -32,7 +32,7 @@ export default function WhyUseCodeConvert() {
             </div>
 
             <div className="flex items-start gap-4 max-w-xs">
-              <FaTrophy className="text-cyan-400 text-4xl mt-1" />
+              <FaTrophy className="text-cyan-400 text-6xl " />
               <div>
                 <h3 className="font-semibold text-lg mb-1">High Quality Code</h3>
                 <p className="text-gray-400 text-sm">
@@ -55,7 +55,7 @@ export default function WhyUseCodeConvert() {
           {/* Right Features */}
           <div className="flex flex-col gap-16 text-left items-start">
             <div className="flex items-start gap-4 max-w-xs">
-              <FaTools className="text-cyan-400 text-4xl mt-1" />
+              <FaTools className="text-cyan-400 text-6xl " />
               <div>
                 <h3 className="font-semibold text-lg mb-1">No Setup Required</h3>
                 <p className="text-gray-400 text-sm">
@@ -66,7 +66,7 @@ export default function WhyUseCodeConvert() {
             </div>
 
             <div className="flex items-start gap-4 max-w-xs">
-              <FaShieldAlt className="text-cyan-400 text-4xl mt-1" />
+              <FaShieldAlt className="text-cyan-400 text-6xl " />
               <div>
                 <h3 className="font-semibold text-lg mb-1">
                   Privacy and Security
