@@ -8,7 +8,7 @@ export default function GetStartedSection() {
         {/* Left - Video */}
         <div className="w-full lg:w-1/2">
           <img
-            src="/Whyimg.svg"
+            src="/Whyimg.png"
             className="w-full h-auto rounded-2xl shadow-lg"
           />
         </div>
