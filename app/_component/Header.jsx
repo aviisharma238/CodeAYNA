@@ -16,6 +16,9 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6 font-semibold">
+          <Link href="/converter" className="hover:text-gray-300">
+            Converter
+          </Link>
           <Link href="/pricing" className="hover:text-gray-300">
             Pricing
           </Link>
