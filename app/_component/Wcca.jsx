@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import { FaInfinity, FaTrophy, FaTools, FaShieldAlt } from "react-icons/fa";
 
 export default function WhyUseCodeConvert() {
@@ -48,6 +49,8 @@ export default function WhyUseCodeConvert() {
             <img
               src="/phone.png"
               alt="Code Convert Mockup"
+              width={350}
+              height={350}
               className="w-full h-full object-cover"
             />
           </div>
