@@ -9,7 +9,7 @@ const firebaseConfig = {
   storageBucket: "codeayna.firebasestorage.app",
   messagingSenderId: "1021409351140",
   appId: "1:1021409351140:web:d5042a00d13c06dda0a3f1",
-  measurementId: "G-EG9GDMEWK7"
+  measurementId: "G-EG9GDMEWK7",
 };
 
 const app = initializeApp(firebaseConfig);
