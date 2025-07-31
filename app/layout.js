@@ -3,7 +3,8 @@ import "./globals.css";
 import Header from "./_component/Header";
 import Footer from "./_component/Footer";
 import "aos/dist/aos.css";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
         antialiased bg-white dark:bg-[#171717] text-black dark:text-white overflow-x-hidden relative`}
         >
         <Analytics/>
+        <SpeedInsights />
         <Header />
         {children}
         <Footer />
