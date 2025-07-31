@@ -4,8 +4,8 @@ import { getAuth } from "firebase/auth";
 let app;
 if (typeof window !== "undefined") {
   const firebaseConfig = {
-    apiKey: process.env.FIREBASE_API_KEY,
-    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
     projectId: "codeayna",
     storageBucket: "codeayna.appspot.com", // ❗fix this too (see below)
     messagingSenderId: "1021409351140",
