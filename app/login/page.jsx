@@ -1,51 +1,11 @@
 'use client';
-
-import { useRouter } from 'next/navigation';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
-import { auth } from '@/lib/firebase';
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  GithubAuthProvider,
-  onAuthStateChanged,
-} from 'firebase/auth';
-import { useEffect } from 'react';
 
 export default function Login() {
-  const router = useRouter();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        router.push('/');
-      }
-    });
-    return () => unsubscribe();
-  }, [router]);
-
-  const handleGoogleLogin = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-      router.push('/');
-    } catch (error) {
-      console.error('Google login error:', error);
-    }
-  };
-
-  const handleGithubLogin = async () => {
-    const provider = new GithubAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-      router.push('/');
-    } catch (error) {
-      console.error('GitHub login error:', error);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 py-10 text-center">
       <div className="w-full max-w-md space-y-6">
+        
         {/* Logo */}
         <h1 className="text-3xl font-extrabold text-pink-500">
           <span className="text-white">Code</span>AYNA
@@ -57,17 +17,11 @@ export default function Login() {
 
         {/* Social Buttons */}
         <div className="space-y-3">
-          <button
-            onClick={handleGoogleLogin}
-            className="w-full flex items-center justify-center gap-3 bg-zinc-800 text-white py-2 rounded-md hover:bg-zinc-700 transition"
-          >
+          <button className="w-full flex items-center justify-center gap-3 bg-zinc-800 text-white py-2 rounded-md hover:bg-zinc-700 transition">
             <FaGoogle className="text-lg" />
             Login with Google
           </button>
-          <button
-            onClick={handleGithubLogin}
-            className="w-full flex items-center justify-center gap-3 bg-zinc-800 text-white py-2 rounded-md hover:bg-zinc-700 transition"
-          >
+          <button className="w-full flex items-center justify-center gap-3 bg-zinc-800 text-white py-2 rounded-md hover:bg-zinc-700 transition">
             <FaGithub className="text-lg" />
             Login with GitHub
           </button>
