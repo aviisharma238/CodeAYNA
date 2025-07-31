@@ -10,9 +10,9 @@ export async function POST(req) {
 Convert the following code from ${sourceLang} to ${targetLang}.
 Only return the converted code. Do not include any explanation or extra text and you add text then comment then .
 
-\`\`\`${sourceLang}
+${sourceLang}
 ${inputCode}
-\`\`\`
+
 `;
 
     const groqResponse = await fetch("https://api.groq.com/openai/v1/chat/completions", {
