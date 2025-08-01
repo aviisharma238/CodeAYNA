@@ -60,33 +60,54 @@ const reviews = [
   {
     name: 'Teffy Billion Dollars',
     handle: '@teffy_101',
-    text: 'My Yam and pepper sauce just came from King Glab and Chowdeck and my Godddd! This is the best thing to happen to me this week.',
+    text: 'Just used CodeAYNA to flip my code from Python to JS and my Godddd! This is the best thing to happen to me this week. 🔥💻'
   },
   {
     name: 'Fã',
     handle: '@adorntresses',
-    text: 'Chowdeck is the best Nigerian mobile app I have ever used. Yes, quote me.',
+    text: 'CodeAYNA is the best code converter I have ever used. Yes, quote me. Period. 🧠✨'
   },
   {
     name: '雨尘',
     handle: '@MrRainClouds',
-    text: 'Chowdeck delivered in 20 minutes. Rider said “pardon my lateness” 🫡',
+    text: 'CodeAYNA converted my file in seconds. Output was so clean, I wanted to cry. 😭📂'
   },
   {
     name: 'Teresa',
     handle: '@theRealTessz',
-    text: 'I won gbafu but I can’t. Because chowdeck riders move like thieves in the night. Before you cough, rider don reach your gate.',
+    text: 'I tried CodeAYNA for fun but now I can’t stop. It converts before you even finish selecting the language. 🧙‍♂️🚀'
   },
   {
     name: 'Wine',
     handle: '@fineWine',
-    text: 'I genuinely love @chowdeck. A top app with top service.',
+    text: 'I genuinely love @codeayna. A top-tier tool with flawless results. 👑🛠️'
   },
   {
     name: 'THEE AWAZI',
     handle: '@thee_awazi',
-    text: 'Food!!! 🥹 So excited that I can now order through @chowdeck on the island.',
+    text: 'CodeAYNA!!! 🥹 So happy I can now convert from ANY language to ANY. It’s giving magical. 🧚‍♀️'
   },
+  {
+    name: 'Muna Byte',
+    handle: '@muna_dev',
+    text: 'Switched from Java to Rust with CodeAYNA and didn’t break a sweat. Game changer fr. 🔄💥'
+  },
+  {
+    name: 'Ike Codes',
+    handle: '@ikethebuilder',
+    text: 'Honestly? CodeAYNA is faster than my thought process. Like I blinked and my code was ready. 🤯⚡'
+  },
+  {
+    name: 'Sara Script',
+    handle: '@scriptingqueen',
+    text: 'I stan @codeayna so hard. That UI? Those icons? That output? PERFECTION. 🖤💻'
+  },
+  {
+    name: 'Jem O.',
+    handle: '@jemwritescode',
+    text: 'I converted an entire C++ project to Python in like 3 seconds. Who even needs StackOverflow now? 😂🙌'
+  }
+
 ];
 
 const faqList = [
@@ -177,7 +198,7 @@ export default function PricingReviewFAQ() {
   );
 
   return (
-    <div className="bg-black text-white px-4 md:px-12 py-16 space-y-24">
+    <div className="bg-black text-white py-16 space-y-24">
 
       {/* Pricing Section */}
       <section className="text-center">
