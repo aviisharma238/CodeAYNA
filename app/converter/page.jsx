@@ -4,12 +4,13 @@ import { useState, useRef } from "react";
 import { FiUpload, FiDownload, FiCopy } from "react-icons/fi";
 import { Repeat } from "lucide-react";
 import Image from "next/image";
+import Editor from "@monaco-editor/react";
 
 export default function CodeConverterUI() {
   const [inputCode, setInputCode] = useState("");
-  const [outputCode, setOutputCode] = useState("");
   const fileInputRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  const [outputCode, setOutputCode] = useState("");
 
   const allLanguages = [
     "actionscript",
@@ -149,35 +150,37 @@ export default function CodeConverterUI() {
     URL.revokeObjectURL(url);
   };
 
+
   const handleConvert = async () => {
-    if (!inputCode.trim()) {
-      alert("Please enter or upload some code first!");
-      return;
-    }
+  setLoading(true);
+  setOutputCode(""); // optional: reset output
 
-    try {
-      const response = await fetch("/api/convert", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sourceLang,
-          targetLang,
-          inputCode,
-        }),
-      });
+  try {
+    const res = await fetch("/api/convert", {
+      method: "POST",
+      body: JSON.stringify({
+        sourceLang,
+        targetLang,
+        inputCode,
+      }),
+    });
 
-      const data = await response.json();
+    const data = await res.json();
 
-      if (response.ok && data.convertedCode) {
-        setOutputCode(data.convertedCode);
-      } else {
-        alert("Conversion failed. Please try again.");
-      }
-    } catch (error) {
-      console.error("Conversion error:", error);
-      alert("An error occurred during conversion.");
-    }
-  };
+    const cleaned = data.convertedCode
+      ?.replace(/^```[\s\S]*?\n/, "") // remove opening ```
+      .replace(/```$/, "") // remove closing ```
+      .trim();
+
+    setOutputCode(cleaned || "");
+  } catch (error) {
+    console.error("Conversion failed:", error);
+    setOutputCode("// Failed to convert");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-black text-white px-4 py-10 flex flex-col items-center">
@@ -189,7 +192,12 @@ export default function CodeConverterUI() {
       {/* Language Selector */}
       <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 mb-8">
         <div className="flex items-center gap-3">
-          <Image src={iconMap[sourceLang]} alt="Source Icon" width={40} height={40} />
+          <Image
+            src={iconMap[sourceLang]}
+            alt="Source Icon"
+            width={40}
+            height={40}
+          />
           <select
             className="bg-zinc-900 text-white px-4 py-2 rounded-md"
             value={sourceLang}
@@ -226,7 +234,12 @@ export default function CodeConverterUI() {
               </option>
             ))}
           </select>
-          <Image src={iconMap[targetLang]} alt="Target Icon" width={40} height={40} />
+          <Image
+            src={iconMap[targetLang]}
+            alt="Target Icon"
+            width={40}
+            height={40}
+          />
         </div>
       </div>
 
@@ -252,41 +265,87 @@ export default function CodeConverterUI() {
               onChange={handleFileUpload}
             />
           </div>
-          <textarea
-            className="w-full h-72 p-4 bg-zinc-200 text-sm outline-none resize-none"
-            placeholder="Paste your code here"
+          <Editor
+            height="300px"
+            defaultLanguage={sourceLang}
             value={inputCode}
-            onChange={(e) => setInputCode(e.target.value)}
+            theme="light" // use 'light' or 'vs-light'
+            onChange={(value) => setInputCode(value || "")}
+            options={{
+              fontSize: 14,
+              minimap: { enabled: false }, // hides the vertical preview panel
+              scrollBeyondLastLine: false,
+              scrollbar: {
+                vertical: "visible", // visible but slim
+                horizontal: "visible",
+                verticalScrollbarSize: 6,
+                horizontalScrollbarSize: 6,
+                handleMouseWheel: true,
+                useShadows: false,
+              },
+              lineNumbers: "on",
+              wordWrap: "on", // or "bounded"
+            }}
           />
         </div>
 
         {/* Output Box */}
-        <div className="bg-zinc-200 text-black rounded-xl shadow-md relative overflow-hidden">
-          <button
-            onClick={handleDownload}
-            className="bg-zinc-300 px-4 w-full py-2 text-sm flex items-center gap-2"
-          >
-            <FiDownload />
-            <span>
-              Download your {targetLang} file in just one click.
-              <br />
-              You can also copy code below.
-            </span>
-          </button>
+        {/* Output Box */}
+<div className="bg-zinc-200 text-black rounded-xl shadow-md relative overflow-hidden min-h-[300px]">
+  <button
+    onClick={handleDownload}
+    className="bg-zinc-300 px-4 w-full py-2 text-sm flex items-center gap-2"
+    disabled={loading}
+  >
+    <FiDownload />
+    <span>
+      Download your {targetLang} file in just one click.
+      <br />
+      You can also copy code below.
+    </span>
+  </button>
 
-          <textarea
-            className="w-full h-72 p-4 bg-zinc-200 text-sm outline-none resize-none"
-            placeholder="Converted code will appear here"
-            value={outputCode}
-            readOnly
-          />
-          <button
-            className="absolute bottom-2 right-2 text-gray-600 hover:text-black"
-            onClick={() => navigator.clipboard.writeText(outputCode)}
-          >
-            <FiCopy size={18} />
-          </button>
-        </div>
+  {loading ? (
+    <div className="flex justify-center items-center h-[260px]">
+      <div className="flex flex-col items-center text-pink-600">
+        <div className="w-6 h-6 border-4 border-pink-400 border-t-transparent rounded-full animate-spin"></div>
+        <p className="mt-4 text-sm font-medium">Converting your code…</p>
+      </div>
+    </div>
+  ) : (
+    <>
+      <Editor
+        height="260px"
+        defaultLanguage={targetLang}
+        value={outputCode}
+        theme="light"
+        options={{
+          readOnly: true,
+          fontSize: 14,
+          minimap: { enabled: false },
+          scrollBeyondLastLine: false,
+          scrollbar: {
+            vertical: "visible",
+            horizontal: "visible",
+            verticalScrollbarSize: 6,
+            horizontalScrollbarSize: 6,
+            handleMouseWheel: true,
+            useShadows: false,
+          },
+          lineNumbers: "on",
+          wordWrap: "on",
+        }}
+      />
+      <button
+        className="absolute bottom-2 right-2 text-gray-600 hover:text-black"
+        onClick={() => navigator.clipboard.writeText(outputCode)}
+      >
+        <FiCopy size={18} />
+      </button>
+    </>
+  )}
+</div>
+
       </div>
 
       {/* Action Buttons */}

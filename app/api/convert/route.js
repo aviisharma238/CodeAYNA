@@ -1,6 +1,11 @@
-// app/api/convert/route.js
-
 import { NextResponse } from "next/server";
+
+function cleanOutput(raw) {
+  return raw
+    .replace(/^```[\s\S]*?\n/, "") // Remove ``` and optional language at start
+    .replace(/```$/, "")           // Remove ``` at end
+    .trim();                       // Clean extra space/newlines
+}
 
 export async function POST(req) {
   try {
@@ -8,11 +13,10 @@ export async function POST(req) {
 
     const prompt = `
 Convert the following code from ${sourceLang} to ${targetLang}.
-Only return the converted code. Do not include any explanation or extra text and you add text then comment then .
+Only return the converted code. Do not include any explanation or extra text and you add text then comment then.
 
 ${sourceLang}
 ${inputCode}
-
 `;
 
     const groqResponse = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -22,7 +26,7 @@ ${inputCode}
         "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "llama3-8b-8192", // You can change to llama3-70b if needed
+        model: "llama3-8b-8192",
         messages: [
           {
             role: "system",
@@ -39,7 +43,8 @@ ${inputCode}
 
     const result = await groqResponse.json();
 
-    const convertedCode = result.choices?.[0]?.message?.content || "";
+    const rawCode = result.choices?.[0]?.message?.content || "";
+    const convertedCode = cleanOutput(rawCode); // 🧼 clean triple backticks
 
     return NextResponse.json({ convertedCode });
   } catch (err) {
