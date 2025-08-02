@@ -14,10 +14,11 @@ const orbiters = [
   { src: "/codeimg/java.svg", alt: "Java", top: "35%", left: "10%" },
   { src: "/codeimg/php.svg", alt: "PHP", top: "10%", left: "30%" },
   { src: "/codeimg/ruby.svg", alt: "Ruby", top: "40%", left: "70%" },
+  { src: "/codeimg/vba.svg", alt: "vba", top: "45%", left: "25%" },
   { src: "/codeimg/swift.svg", alt: "Swift", top: "85%", left: "50%" },
   { src: "/codeimg/typescript.svg", alt: "TypeScript", top: "18%", left: "75%" },
   { src: "/codeimg/kotlin.svg", alt: "Kotlin", top: "68%", left: "78%" },
-  { src: "/codeimg/rust.svg", alt: "Rust", top: "78%", left: "20%" },
+  { src: "/codeimg/pascal.svg", alt: "pascal", top: "78%", left: "20%" },
 ];
 
 export default function HeroSection() {
