@@ -24,15 +24,28 @@ const orbiters = [
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#000000] via-[#1b1b2f] to-[#000000] text-white overflow-hidden px-4">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#000000] via-[#2a1a22] to-[#000000] text-white overflow-hidden px-4">
       <div className="absolute inset-0 pointer-events-none">
+        
         {/* Orbit rings */}
-        {[...Array(7)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute w-[${900 - i * 100}px] h-[${900 - i * 100}px] rounded-full border border-white/10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
-          />
-        ))}
+{[...Array(10)].map((_, i) => {
+  const size = 1200 - i * 100;
+  return (
+    <div
+      key={i}
+      style={{
+        width: size,
+        height: size,
+        borderRadius: "50%",
+        border: "1px solid rgba(255,255,255,0.1)",
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+    />
+  );
+})}
 
         {/* Floating logos */}
         {orbiters.map((orb, i) => {
@@ -51,7 +64,7 @@ export default function HeroSection() {
 
       {/* Center Content */}
       <div className="z-10 text-center max-w-2xl animate-fade-in">
-        <h1 className="text-4xl md:text-6xl font-bold leading-tight text-white inline-block overflow-hidden whitespace-nowrap border-r-4 border-white animate-typingLoop">
+        <h1 className="text-4xl md:text-6xl font-bold leading-tight text-[#ff0080] inline-block overflow-hidden whitespace-nowrap border-r-4 border-white animate-typingLoop">
           CodeAYNA
         </h1>
 
