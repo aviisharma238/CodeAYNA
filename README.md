@@ -148,7 +148,7 @@ git commit -m "Added YourFeatureName"
 ---
 # ❤️ Contributors
 <a href="https://github.com/aviisharma238/CodeAYNA/graphs/contributors"> <img src="https://contrib.rocks/image?repo=aviisharma238/CodeAYNA" /> </a>
-<a href="https://github.com/aviisharma238/CodeAYNA/graphs/contributors"> <img src="https://contrib.rocks/image?repo=aviisharma238/CodeAYNA" /> </a>
+<a href="https://github.com/Manas-gupta-04/CodeAYNA/graphs/contributors"> <img src="https://contrib.rocks/image?repo=Manas-gupta-04/CodeAYNA" /> </a>
 ![GitHub stars](https://img.shields.io/github/stars/aviisharma238/CodeAYNA?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/aviisharma238/CodeAYNA?style=for-the-badge)
 ![GitHub issues](https://img.shields.io/github/issues/aviisharma238/CodeAYNA?style=for-the-badge)
