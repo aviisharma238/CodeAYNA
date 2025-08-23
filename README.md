@@ -1,7 +1,7 @@
 <div align="center">
   <br />
   <a href="https://codeayna.vercel.app" target="_blank">
-    <img src="public/readme/phone.png" alt="CodeAYNA Banner">
+    <img src="public/phone.png" alt="CodeAYNA Banner">
   </a>
   <br />
   <div>
