@@ -25,10 +25,9 @@
 2. ⚙️ [Tech Stack](#tech-stack)  
 3. 🔋 [Features](#features)  
 4. 🏗️ [System Architecture](#system-architecture)  
-5. ⚡ [API Design](#api-design)  
-6. 👨‍💻 [Team Members](#team-members)  
-7. 🤝 [How to Contribute](#how-to-contribute)  
-8. ❤️ [Contributors](#️-contributors)  
+5. ⚡ [API Design](#api-design)
+6. 🤝 [How to Contribute](#how-to-contribute)  
+7. ❤️ [Contributors](#️-contributors)  
 
 ---
 
