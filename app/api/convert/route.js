@@ -2,20 +2,27 @@ import { NextResponse } from "next/server";
 
 function cleanOutput(raw) {
   return raw
-    .replace(/^```[\s\S]*?\n/, "") // Remove ``` and optional language at start
-    .replace(/```$/, "")           // Remove ``` at end
-    .trim();                       // Clean extra space/newlines
+    .replace(/^```[\s\S]*?\n/, "") // Remove opening ```
+    .replace(/```$/, "")           // Remove closing ```
+    .trim();
 }
 
 export async function POST(req) {
   try {
     const { sourceLang, targetLang, inputCode } = await req.json();
 
+    if (!sourceLang || !targetLang || !inputCode) {
+      return NextResponse.json(
+        { error: "Missing fields: sourceLang, targetLang, inputCode are required." },
+        { status: 400 }
+      );
+    }
+
     const prompt = `
 Convert the following code from ${sourceLang} to ${targetLang}.
-Only return the converted code. Do not include any explanation or extra text and you add text then comment then.
+Only return the converted code. If you add text, put it in comments.
 
-${sourceLang}
+${sourceLang} code:
 ${inputCode}
 `;
 
@@ -23,10 +30,10 @@ ${inputCode}
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+        Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "llama3-8b-8192",
+        model: "llama-3.1-8b-instant",
         messages: [
           {
             role: "system",
@@ -41,14 +48,31 @@ ${inputCode}
       }),
     });
 
+    if (!groqResponse.ok) {
+      const errText = await groqResponse.text();
+      console.error("Groq API error:", errText);
+      return NextResponse.json({ error: "Groq API request failed" }, { status: 500 });
+    }
+
     const result = await groqResponse.json();
+    console.log("Groq raw response:", result); // 👀 debug
 
-    const rawCode = result.choices?.[0]?.message?.content || "";
-    const convertedCode = cleanOutput(rawCode); // 🧼 clean triple backticks
+    const rawCode =
+      result.choices?.[0]?.message?.content ||
+      result.choices?.[0]?.delta?.content ||
+      "";
 
+    if (!rawCode) {
+      return NextResponse.json(
+        { error: "No code returned from Groq" },
+        { status: 500 }
+      );
+    }
+
+    const convertedCode = cleanOutput(rawCode);
     return NextResponse.json({ convertedCode });
   } catch (err) {
-    console.error("GROQ error:", err);
+    console.error("Backend error:", err);
     return NextResponse.json({ error: "Failed to convert code." }, { status: 500 });
   }
 }
