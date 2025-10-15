@@ -19,4 +19,5 @@ export const googleProvider = new GoogleAuthProvider();
 export const db = getFirestore(app);
 
 // ✅ Export app if you need it elsewhere
+export { auth, githubProvider };
 export { app };
