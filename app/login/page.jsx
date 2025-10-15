@@ -13,7 +13,7 @@ export default function Login() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        router.push("/"); // redirect to home
+        router.push(" / "); // redirect to home
       }
     });  
     return () => unsubscribe();
