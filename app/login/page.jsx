@@ -15,7 +15,7 @@ export default function Login() {
       if (user) {
         router.push("/"); // redirect to home
       }
-    });
+    });  
     return () => unsubscribe();
   }, [router]);
 
