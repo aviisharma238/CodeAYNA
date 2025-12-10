@@ -13,116 +13,19 @@ export default function CodeConverterUI() {
   const [outputCode, setOutputCode] = useState("");
 
   const allLanguages = [
-    "actionscript",
-    "ada",
-    "assembly",
-    "c",
-    "c++",
-    "clojure",
-    "cobol",
-    "coffeescript",
-    "cql",
-    "crystal",
-    "csharp",
-    "dart",
-    "elasticsearch",
-    "elixir",
-    "elm",
-    "erlang",
-    "fortran",
-    "fsharp",
-    "golang",
-    "groovy",
-    "haskell",
-    "haxe",
-    "infinity",
-    "java",
-    "javascript",
-    "julia",
-    "kotlin",
-    "lisp",
-    "lua",
-    "matlab",
-    "mongodb",
-    "mysql",
-    "objc",
-    "ocaml",
-    "pascal",
-    "php",
-    "postgresql",
-    "pyspark",
-    "python",
-    "r",
-    "racket",
-    "redis",
-    "ruby",
-    "rust",
-    "sas",
-    "scala",
-    "scheme",
-    "shield-check",
-    "sql",
-    "swift",
-    "tcl",
-    "target",
-    "typescript",
+    "actionscript", "ada", "assembly", "c", "c++", "clojure", "cobol",
+    "coffeescript", "cql", "crystal", "csharp", "dart", "elasticsearch",
+    "elixir", "elm", "erlang", "fortran", "fsharp", "golang", "groovy",
+    "haskell", "haxe", "infinity", "java", "javascript", "julia", "kotlin",
+    "lisp", "lua", "matlab", "mongodb", "mysql", "objc", "ocaml", "pascal",
+    "php", "postgresql", "pyspark", "python", "r", "racket", "redis", "ruby",
+    "rust", "sas", "scala", "scheme", "shield-check", "sql", "swift", "tcl",
+    "target", "typescript",
   ];
 
-  const iconMap = {
-    actionscript: "/codeimg/actionscript.svg",
-    ada: "/codeimg/ada.svg",
-    assembly: "/codeimg/assembly.svg",
-    c: "/codeimg/c.svg",
-    "c++": "/codeimg/c++.svg",
-    clojure: "/codeimg/clojure.svg",
-    cobol: "/codeimg/cobol.svg",
-    coffeescript: "/codeimg/coffeescript.svg",
-    cql: "/codeimg/cql.svg",
-    crystal: "/codeimg/crystal.svg",
-    csharp: "/codeimg/csharp.svg",
-    dart: "/codeimg/dart.svg",
-    elasticsearch: "/codeimg/elasticsearch.svg",
-    elixir: "/codeimg/elixir.svg",
-    elm: "/codeimg/elm.svg",
-    erlang: "/codeimg/erlang.svg",
-    fortran: "/codeimg/fortran.svg",
-    fsharp: "/codeimg/fsharp.svg",
-    golang: "/codeimg/golang.svg",
-    groovy: "/codeimg/groovy.svg",
-    haskell: "/codeimg/haskell.svg",
-    haxe: "/codeimg/haxe.svg",
-    infinity: "/codeimg/infinity.svg",
-    java: "/codeimg/java.svg",
-    javascript: "/codeimg/javascript.svg",
-    julia: "/codeimg/julia.svg",
-    kotlin: "/codeimg/kotlin.svg",
-    lisp: "/codeimg/lisp.svg",
-    lua: "/codeimg/lua.svg",
-    matlab: "/codeimg/matlab.svg",
-    mongodb: "/codeimg/mongodb.svg",
-    mysql: "/codeimg/mysql.svg",
-    objc: "/codeimg/objc.svg",
-    ocaml: "/codeimg/ocaml.svg",
-    pascal: "/codeimg/pascal.svg",
-    php: "/codeimg/php.svg",
-    postgresql: "/codeimg/postgresql.svg",
-    pyspark: "/codeimg/pyspark.svg",
-    python: "/codeimg/python.svg",
-    r: "/codeimg/r.svg",
-    racket: "/codeimg/racket.svg",
-    redis: "/codeimg/redis.svg",
-    ruby: "/codeimg/ruby.svg",
-    rust: "/codeimg/rust.svg",
-    sas: "/codeimg/sas.svg",
-    scala: "/codeimg/scala.svg",
-    scheme: "/codeimg/scheme.svg",
-    "shield-check": "/codeimg/shield-check.svg",
-    sql: "/codeimg/sql.svg",
-    swift: "/codeimg/swift.svg",
-    tcl: "/codeimg/tcl.svg",
-    target: "/codeimg/target.svg",
-    typescript: "/codeimg/typescript.svg",
-  };
+  const iconMap = Object.fromEntries(
+    allLanguages.map((lang) => [lang, `/codeimg/${lang}.svg`])
+  );
 
   const [sourceLang, setSourceLang] = useState("javascript");
   const [targetLang, setTargetLang] = useState("python");
@@ -150,37 +53,70 @@ export default function CodeConverterUI() {
     URL.revokeObjectURL(url);
   };
 
-
   const handleConvert = async () => {
-  setLoading(true);
-  setOutputCode(""); // optional: reset output
+    setLoading(true);
+    setOutputCode("");
 
-  try {
-    const res = await fetch("/api/convert", {
-      method: "POST",
-      body: JSON.stringify({
-        sourceLang,
-        targetLang,
-        inputCode,
-      }),
-    });
+    try {
+      const res = await fetch("/api/convert", {
+        method: "POST",
+        body: JSON.stringify({
+          sourceLang,
+          targetLang,
+          inputCode,
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    const cleaned = data.convertedCode
-      ?.replace(/^```[\s\S]*?\n/, "") // remove opening ```
-      .replace(/```$/, "") // remove closing ```
-      .trim();
+      const cleaned = data.convertedCode
+        ?.replace(/^```[\s\S]*?\n/, "")
+        .replace(/```$/, "")
+        .trim();
 
-    setOutputCode(cleaned || "");
-  } catch (error) {
-    console.error("Conversion failed:", error);
-    setOutputCode("// Failed to convert");
-  } finally {
-    setLoading(false);
-  }
-};
+      setOutputCode(cleaned || "");
+    } catch (error) {
+      console.error("Conversion failed:", error);
+      setOutputCode("// Failed to convert");
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  // ⭐ SAVE FUNCTION for Dashboard
+  const handleSave = async () => {
+    if (!inputCode || !outputCode) {
+      alert("Please convert code before saving!");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/saveConversion", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sourceLang,
+          targetLang,
+          inputCode,
+          outputCode,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.error === "unauthorized") {
+        alert("Please login to save your conversion !");
+        return;
+      }
+
+      if (data.success) {
+        alert("Saved successfully to your dashboard!");
+      }
+    } catch (error) {
+      console.error("Save Error:", error);
+      alert("Failed to save! Please try again.");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black text-white px-4 py-10 flex flex-col items-center">
@@ -234,6 +170,7 @@ export default function CodeConverterUI() {
               </option>
             ))}
           </select>
+
           <Image
             src={iconMap[targetLang]}
             alt="Target Icon"
@@ -243,8 +180,9 @@ export default function CodeConverterUI() {
         </div>
       </div>
 
-      {/* Input and Output Panels */}
+      {/* Input + Output Boxes */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl">
+
         {/* Input Box */}
         <div className="bg-zinc-200 text-black rounded-xl shadow-md overflow-hidden">
           <div
@@ -265,18 +203,19 @@ export default function CodeConverterUI() {
               onChange={handleFileUpload}
             />
           </div>
+
           <Editor
             height="300px"
             defaultLanguage={sourceLang}
             value={inputCode}
-            theme="light" // use 'light' or 'vs-light'
+            theme="light"
             onChange={(value) => setInputCode(value || "")}
             options={{
               fontSize: 14,
-              minimap: { enabled: false }, // hides the vertical preview panel
+              minimap: { enabled: false },
               scrollBeyondLastLine: false,
               scrollbar: {
-                vertical: "visible", // visible but slim
+                vertical: "visible",
                 horizontal: "visible",
                 verticalScrollbarSize: 6,
                 horizontalScrollbarSize: 6,
@@ -284,71 +223,69 @@ export default function CodeConverterUI() {
                 useShadows: false,
               },
               lineNumbers: "on",
-              wordWrap: "on", // or "bounded"
+              wordWrap: "on",
             }}
           />
         </div>
 
         {/* Output Box */}
-        {/* Output Box */}
-<div className="bg-zinc-200 text-black rounded-xl shadow-md relative overflow-hidden min-h-[300px]">
-  <button
-    onClick={handleDownload}
-    className="bg-zinc-300 px-4 w-full py-2 text-sm flex items-center gap-2"
-    disabled={loading}
-  >
-    <FiDownload />
-    <span>
-      Download your {targetLang} file in just one click.
-      <br />
-      You can also copy code below.
-    </span>
-  </button>
+        <div className="bg-zinc-200 text-black rounded-xl shadow-md relative overflow-hidden min-h-[300px]">
+          <button
+            onClick={handleDownload}
+            className="bg-zinc-300 px-4 w-full py-2 text-sm flex items-center gap-2"
+            disabled={loading}
+          >
+            <FiDownload />
+            <span>
+              Download your {targetLang} file in just one click.
+              <br />
+              You can also copy code below.
+            </span>
+          </button>
 
-  {loading ? (
-    <div className="flex justify-center items-center h-[260px]">
-      <div className="flex flex-col items-center text-pink-600">
-        <div className="w-6 h-6 border-4 border-pink-400 border-t-transparent rounded-full animate-spin"></div>
-        <p className="mt-4 text-sm font-medium">Converting your code…</p>
-      </div>
-    </div>
-  ) : (
-    <>
-      <Editor
-        height="260px"
-        defaultLanguage={targetLang}
-        value={outputCode}
-        theme="light"
-        options={{
-          readOnly: true,
-          fontSize: 14,
-          minimap: { enabled: false },
-          scrollBeyondLastLine: false,
-          scrollbar: {
-            vertical: "visible",
-            horizontal: "visible",
-            verticalScrollbarSize: 6,
-            horizontalScrollbarSize: 6,
-            handleMouseWheel: true,
-            useShadows: false,
-          },
-          lineNumbers: "on",
-          wordWrap: "on",
-        }}
-      />
-      <button
-        className="absolute bottom-2 right-2 text-gray-600 hover:text-black"
-        onClick={() => navigator.clipboard.writeText(outputCode)}
-      >
-        <FiCopy size={18} />
-      </button>
-    </>
-  )}
-</div>
-
+          {loading ? (
+            <div className="flex justify-center items-center h-[260px]">
+              <div className="flex flex-col items-center text-pink-600">
+                <div className="w-6 h-6 border-4 border-pink-400 border-t-transparent rounded-full animate-spin"></div>
+                <p className="mt-4 text-sm font-medium">Converting your code…</p>
+              </div>
+            </div>
+          ) : (
+            <>
+              <Editor
+                height="260px"
+                defaultLanguage={targetLang}
+                value={outputCode}
+                theme="light"
+                options={{
+                  readOnly: true,
+                  fontSize: 14,
+                  minimap: { enabled: false },
+                  scrollBeyondLastLine: false,
+                  scrollbar: {
+                    vertical: "visible",
+                    horizontal: "visible",
+                    verticalScrollbarSize: 6,
+                    horizontalScrollbarSize: 6,
+                    handleMouseWheel: true,
+                    useShadows: false,
+                  },
+                  lineNumbers: "on",
+                  wordWrap: "on",
+                }}
+              />
+              <button
+                className="absolute bottom-2 right-2 text-gray-600 hover:text-black"
+                onClick={() => navigator.clipboard.writeText(outputCode)}
+              >
+                <FiCopy size={18} />
+              </button>
+            </>
+          )}
+        </div>
       </div>
 
-      {/* Action Buttons */}
+      {/* Buttons */}
       <div className="flex gap-4 mt-10">
         <button
           className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-md font-semibold"
@@ -365,6 +302,14 @@ export default function CodeConverterUI() {
           }}
         >
           Clear all
+        </button>
+
+        {/* ⭐ SAVE BUTTON ADDED */}
+        <button
+          className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-md font-semibold"
+          onClick={handleSave}
+        >
+          Save to Dashboard
         </button>
       </div>
     </div>

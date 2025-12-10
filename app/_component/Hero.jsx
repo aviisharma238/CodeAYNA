@@ -10,14 +10,24 @@ const orbiters = [
   { src: "/codeimg/python.svg", alt: "Python", top: "60%", left: "90%" },
   { src: "/codeimg/csharp.svg", alt: "csharp", top: "75%", left: "65%" },
   { src: "/codeimg/sql.svg", alt: "SQL", top: "85%", left: "35%" },
-  { src: "/codeimg/javascript.svg", alt: "JavaScript", top: "60%", left: "10%" },
+  {
+    src: "/codeimg/javascript.svg",
+    alt: "JavaScript",
+    top: "60%",
+    left: "10%",
+  },
   { src: "/codeimg/java.svg", alt: "Java", top: "28%", left: "8%" },
   { src: "/codeimg/php.svg", alt: "PHP", top: "10%", left: "30%" },
   { src: "/codeimg/dart.svg", alt: "dart", top: "10%", left: "15%" },
   { src: "/codeimg/ruby.svg", alt: "Ruby", top: "40%", left: "70%" },
   { src: "/codeimg/vba.svg", alt: "vba", top: "45%", left: "25%" },
   { src: "/codeimg/swift.svg", alt: "Swift", top: "85%", left: "50%" },
-  { src: "/codeimg/typescript.svg", alt: "TypeScript", top: "18%", left: "75%" },
+  {
+    src: "/codeimg/typescript.svg",
+    alt: "TypeScript",
+    top: "18%",
+    left: "75%",
+  },
   { src: "/codeimg/kotlin.svg", alt: "Kotlin", top: "68%", left: "78%" },
   { src: "/codeimg/pascal.svg", alt: "pascal", top: "78%", left: "20%" },
 ];
@@ -26,26 +36,25 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#000000] via-[#2a1a22] to-[#000000] text-white overflow-hidden px-4">
       <div className="absolute inset-0 pointer-events-none">
-        
         {/* Orbit rings */}
-{[...Array(10)].map((_, i) => {
-  const size = 1200 - i * 100;
-  return (
-    <div
-      key={i}
-      style={{
-        width: size,
-        height: size,
-        borderRadius: "50%",
-        border: "1px solid rgba(255,255,255,0.1)",
-        position: "absolute",
-        left: "50%",
-        top: "50%",
-        transform: "translate(-50%, -50%)",
-      }}
-    />
-  );
-})}
+        {[...Array(10)].map((_, i) => {
+          const size = 1200 - i * 100;
+          return (
+            <div
+              key={i}
+              style={{
+                width: size,
+                height: size,
+                borderRadius: "50%",
+                border: "1px solid rgba(255,255,255,0.1)",
+                position: "absolute",
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            />
+          );
+        })}
 
         {/* Floating logos */}
         {orbiters.map((orb, i) => {
@@ -65,7 +74,7 @@ export default function HeroSection() {
       {/* Center Content */}
       <div className="z-10 text-center max-w-2xl animate-fade-in">
         <h1 className="text-4xl md:text-6xl font-bold leading-tight text-[#ff0080] inline-block overflow-hidden whitespace-nowrap border-r-4 border-white animate-typingLoop">
-          CodeAYNA
+          <span className="text-gray-200">Code</span>AYNA
         </h1>
 
         <h2 className="text-lg md:text-2xl text-white/80 mt-4 px-2">

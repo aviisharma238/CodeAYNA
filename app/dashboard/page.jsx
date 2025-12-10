@@ -68,6 +68,12 @@ export default function Dashboard() {
             />
           )}
           <h2 className="text-2xl font-bold">Welcome, {user.displayName}</h2>
+          <h2 className="text-sm text-gray-400">{user.email}</h2>
+          <h2 className="text-sm text-gray-400">UID: {user.uid}</h2>
+          <h2 className="text-sm text-gray-400">Provider: {user.providerId}</h2>
+          <h2 className="text-sm text-gray-400">Email Verified: {user.emailVerified ? "Yes" : "No"}</h2>
+          <h2 className="text-sm text-gray-400">Account Created: {new Date(user.metadata.creationTime).toLocaleDateString()}</h2>
+          <h2 className="text-sm text-gray-400">Last Sign-in: {new Date(user.metadata.lastSignInTime).toLocaleDateString()}</h2>
         </div>
         <Link
           href="/converter"

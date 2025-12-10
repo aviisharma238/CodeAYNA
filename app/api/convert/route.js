@@ -51,11 +51,11 @@ ${inputCode}
     if (!groqResponse.ok) {
       const errText = await groqResponse.text();
       console.error("Groq API error:", errText);
-      return NextResponse.json({ error: "Groq API request failed" }, { status: 500 });
+      return NextResponse.json({ error: " Groq API request failed " }, { status: 500 });
     }
 
     const result = await groqResponse.json();
-    console.log("Groq raw response:", result); // 👀 debug
+    console.log(" Groq raw response: ", result); // 👀 debug
 
     const rawCode =
       result.choices?.[0]?.message?.content ||
@@ -64,7 +64,7 @@ ${inputCode}
 
     if (!rawCode) {
       return NextResponse.json(
-        { error: "No code returned from Groq" },
+        { error: " Api fail Groq " },
         { status: 500 }
       );
     }
@@ -72,7 +72,7 @@ ${inputCode}
     const convertedCode = cleanOutput(rawCode);
     return NextResponse.json({ convertedCode });
   } catch (err) {
-    console.error("Backend error:", err);
-    return NextResponse.json({ error: "Failed to convert code." }, { status: 500 });
+    console.error("Backend error: ", err);
+    return NextResponse.json({ error: " Failed to convert code. " }, { status: 500 });
   }
 }

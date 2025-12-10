@@ -22,7 +22,7 @@ export default function Login() {
   const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-      router.push("/"); // redirect after login
+      router.push(" / "); // redirect after login
     } catch (error) {
       console.error(error);
     }
@@ -31,7 +31,7 @@ export default function Login() {
   const handleGithubLogin = async () => {
     try {
       await signInWithPopup(auth, githubProvider);
-      router.push("/"); // redirect after login
+      router.push(" / "); // redirect after login
     } catch (error) {
       console.error(error);
     }

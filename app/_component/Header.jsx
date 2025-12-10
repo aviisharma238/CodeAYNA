@@ -1,8 +1,9 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
-import { auth } from "@/firebase"; // make sure path is correct
+import { auth, githubProvider } from "/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
 export default function Header() {
@@ -17,12 +18,13 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="bg-black text-white px-6 py-4 sticky top-0 z-50">
+    <header className="bg-transparent text-white px-6 py-4 sticky top-0 z-50">
       <div className="max-w-8xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="text-2xl text-[#ff0080] font-extrabold">
-          CodeAYNA
+          <span className="text-gray-200">Code</span>AYNA
         </Link>
+         
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6 font-semibold">
@@ -149,4 +151,4 @@ export default function Header() {
     </header>
   );
 }
-``
+``;
